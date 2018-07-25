@@ -10,7 +10,7 @@ from .reducer import expense_reducer
 def create_expense(request):
     next_event = {
         "event_type": "ExpenseCreated",
-        "expense": {"content": request.POST.dict()}
+        "expense": request.POST.dict()
     }
 
     event = ExpenseEventLog.objects.create(
@@ -32,7 +32,7 @@ def edit_expense(request, expense_id):
         next_sequence = previous_event.sequence + 1
         next_event = {
             "event_type": "ExpenseUpdated",
-            "expense": {"content": request.POST.dict()}
+            "expense": request.POST.dict()
         }
 
         event = ExpenseEventLog.objects.create(
